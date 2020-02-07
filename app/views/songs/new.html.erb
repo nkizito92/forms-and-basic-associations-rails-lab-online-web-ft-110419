@@ -7,9 +7,19 @@
   <%= f.text_field :artist_name %><br>
 
   <%= f.label :genre_id %> <br>
-  <%= f.collection_select  :genre_id, Genre.all, :name, :name %>
+  <%= f.text_field :genre_id, list: "genres_complete" %>
 
+  <datalist id="genres_complete">
+    <% Genre.all.each do |g| %>
+    <option value="<%=g.id%>"> <%= g.name %></option>
+    <% end %>
+  </datalist>
   <br />
+  <%# entering the notes  %>
+     <%= f.fields_for :notes do |n| %> <br>
+      <%= f.label :content %> <br>
+      <%= n.text_field :content %>
+      <% end %>
 
   <%= f.submit %>
 <% end %>
