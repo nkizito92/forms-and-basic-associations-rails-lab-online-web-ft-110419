@@ -5,8 +5,12 @@ class Song < ActiveRecord::Base
   def artist_name=(name)
     self.artist = Artist.find_or_create_by(name: name)
   end
+  
+  def artist_name
+    self.artist ? self.artist.name : nil
+  end 
 
-  def genre_id(id)
+  def genre_id=(id)
     self.genre = Genre.find_or_create_by(id: id)
   end
 
@@ -14,7 +18,4 @@ class Song < ActiveRecord::Base
     self.genre ? self.genre.id : nil
   end
 
-  def artist_name
-    self.artist ? self.artist.name : nil
-  end 
 end
